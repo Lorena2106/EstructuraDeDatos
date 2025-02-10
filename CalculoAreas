@@ -1,0 +1,190 @@
+Main:
+
+#include <iostream>
+#include "Triangulo.h"
+#include "Rectangulo.h"
+#include "Paralelogramo.h"
+using namespace std;
+
+int main()
+{
+    int option;
+    float base, altura;
+    Triangulo Triangulito;
+    Rectangulo Rectangulito;
+    Paralelogramo Paralelogramito;
+    do {
+        cout << "Elija una opción:" << endl << "1. Área de un triángulo" << endl << "2. Área de un rectángulo" << endl << "3. Área de un paralelogramo" << endl << "0. Salir" << endl;
+        cin >> option;
+        switch (option)
+        {
+        case 1:
+            do {
+                cout << "Ingrese la base: ";
+                cin >> base;
+            } while (base < 1);
+            do {
+                cout << "Ingrese la altura: ";
+                cin >> altura;
+            } while (altura < 1);
+            Triangulito.set_altura(altura);
+            Triangulito.set_base(base);
+            cout << "El área es:" << Triangulito.area();
+            break;
+        case 2:
+            do {
+                cout << "Ingrese la base: ";
+                cin >> base;
+            } while (base < 1);
+            do {
+                cout << "Ingrese la altura: ";
+                cin >> altura;
+            } while (altura < 1);
+            Rectangulito.set_altura(altura);
+            Rectangulito.set_base(base);
+            cout << "El área es:" << Rectangulito.area();
+            break;
+        case 3:
+            do {
+                cout << "Ingrese la base: ";
+                cin >> base;
+            } while (base < 1);
+            do {
+                cout << "Ingrese la altura: ";
+                cin >> altura;
+            } while (altura < 1);
+            Paralelogramito.set_altura(altura);
+            Paralelogramito.set_base(base);
+            cout << "El área es:" << Paralelogramito.area();
+            break;
+        case 0: cout << "Saliendo...";
+            break;
+        default:
+            break;
+        }
+    } while (option!=0); 
+}
+
+
+Triangulo.h
+class Triangulo
+{
+private: 
+	float base;
+	float altura;
+public:
+	Triangulo();
+	void set_altura(float _altura);
+	void set_base(float _base);
+	float get_altura();
+	float get_base();
+	float area();
+};
+
+Rectangulo.h
+
+#pragma once
+class Rectangulo
+{
+private:
+	float base;
+	float altura;
+public:
+	Rectangulo();
+	void set_altura(float _altura);
+	void set_base(float _base);
+	float get_altura();
+	float get_base();
+	float area();
+};
+
+
+Paralelogramo.h
+
+#pragma once
+class Paralelogramo
+{
+private:
+	float base;
+	float altura;
+public:
+	Paralelogramo();
+	void set_altura(float _altura);
+	void set_base(float _base);
+	float get_altura();
+	float get_base();
+	float area();
+};
+
+
+Triangulo.cpp
+
+#include "Triangulo.h"
+
+Triangulo::Triangulo() {
+
+}
+void Triangulo::set_altura(float _altura) {
+	altura = _altura;
+}
+void Triangulo::set_base(float _base) {
+	base = _base;
+}
+float Triangulo::get_altura() {
+	return altura;
+}
+float Triangulo::get_base() {
+	return base;
+}
+float Triangulo::area() {
+	return (base * altura) / 2;
+}
+
+
+Rectangulo.cpp
+
+#include "Rectangulo.h"
+
+Rectangulo::Rectangulo() {
+
+}
+void Rectangulo::set_altura(float _altura) {
+	altura = _altura;
+}
+void Rectangulo::set_base(float _base) {
+	base = _base;
+}
+float Rectangulo::get_altura() {
+	return altura;
+}
+float Rectangulo::get_base() {
+	return base;
+}
+float Rectangulo::area() {
+	return (base * altura);
+}
+
+
+Paralelogramo.cpp
+
+
+#include "Paralelogramo.h"
+
+Paralelogramo::Paralelogramo() {
+
+}
+void Paralelogramo::set_altura(float _altura) {
+	altura = _altura;
+}
+void Paralelogramo::set_base(float _base) {
+	base = _base;
+}
+float Paralelogramo::get_altura() {
+	return altura;
+}
+float Paralelogramo::get_base() {
+	return base;
+}
+float Paralelogramo::area() {
+	return (base * altura);
+}
