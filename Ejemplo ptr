@@ -1,0 +1,20 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int numero = 42;
+    int* ptr = &numero; // puntero que guarda la dirección de "numero"
+
+    cout << "Valor de numero: " << numero << endl;
+    cout << "Dirección de numero: " << &numero << endl;
+    cout << "Valor de ptr (la dirección que guarda): " << ptr << endl;
+    cout << "Valor al que apunta ptr (*ptr): " << *ptr << endl;
+
+    // Modificar el valor de numero a través del puntero
+    *ptr = 100;
+
+    cout << "\nDespués de modificar *ptr:\n";
+    cout << "Valor de numero: " << numero << endl;
+
+    return 0;
+}
