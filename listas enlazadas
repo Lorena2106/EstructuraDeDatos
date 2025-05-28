@@ -1,0 +1,189 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Node {
+public:
+    string estudiantes;
+    int data;
+    Node* next;
+};
+
+class LinkedList {
+private:
+    Node* first;
+public:
+    LinkedList() {
+        first = nullptr;
+    }
+    LinkedList(string estudiantes[],int A[], int n);
+    void display();
+    void insert(string estudiantes[],int A[], int n);
+    //void remove (int A[], int n);
+    //void search (int A[], int n);
+    int length();
+    void mayor();
+    void menor();
+    void insert(string estudiantes, int index, int valor);
+    int deleteNode(int index);
+    int aprobados();
+    int reprobados();
+
+
+};
+
+LinkedList::LinkedList(string estudiantes[], int A[], int n) {
+    Node* t, * last;
+    first = new Node();
+    first->estudiantes = estudiantes[0];
+    first->data = A[0];
+    first->next = nullptr;
+    last = first;
+    for (int i = 1; i < n; i++) {
+        t = new Node();
+        t->estudiantes = estudiantes[i];
+        t->data = A[i];
+        last->next = t;
+        last = t;
+    }
+}
+void LinkedList::display() {
+    Node* p = first;
+    while (p) {
+        cout << p->estudiantes << "\t";
+        cout << p->data << endl;
+        p = p->next;
+    }
+    cout << endl;
+}
+
+int LinkedList::length() {
+    Node* p = first;
+    int contador = 0;
+    while (p) {
+        contador = contador + 1;
+        p = p->next;
+    }
+    return contador;
+}
+
+void LinkedList::mayor() {
+    Node* p = first;
+    int maximo = 0;
+    string nombre;
+    while (p) {
+        if (p->data > maximo){
+            maximo = p->data;
+            nombre = p->estudiantes;
+        }
+        p = p->next;
+    }
+    cout << "La nota maxima es: " << maximo << "\t" << nombre << endl;
+
+}
+
+void LinkedList::menor() {
+    Node* p = first;
+    int minimo = first->data;
+    string nombre = first->estudiantes;
+    while (p) {
+        if (p->data < minimo){
+            minimo = p->data;
+            nombre = p->estudiantes;
+        }
+        p = p->next;
+    }
+    cout << "La nota minima es: " << minimo << "\t" << nombre << endl;
+
+}
+
+void LinkedList::insert(string estudiante,int index, int valor) {
+    Node* t, * p = first;
+    int contador = 0;
+    if (index < 0 || length() < index) {
+        cout << "Index is out of bounds" << endl;
+        return;
+    }
+    t = new Node();
+    t->estudiantes = estudiante;
+    t->data = valor;
+    t->next = nullptr;
+    if (index == 0) {
+        t->next = first;
+        first = t;
+    }
+    else {
+        for (int i = 0; i < index - 1; i++) {
+            p->next;
+        }
+        t->next = p->next;
+        p->next = t;
+    }
+
+}
+
+int LinkedList::deleteNode(int index) {
+    Node* p, * q = nullptr;
+    int x;
+    if (index<1 || index>length()) {
+        return -1;
+    }
+    if (index == 1) {
+        p = first;
+        first = first->next;
+        x = p->data;
+        delete p;
+    }
+    else {
+        p = first;
+        for (int i = 0; i < index - 1; i++) {
+            q = p;
+            p = p->next;
+        }
+        q->next = p->next;
+        x = p->data;
+        delete p;
+    }
+    return x;
+}
+
+int LinkedList::aprobados() {
+    Node* p = first;
+    int pasaron=0;
+    while (p) {
+        if (p->data >= 51) {
+            pasaron++;
+        }
+        p = p->next;
+    }
+        return pasaron;
+}
+
+int LinkedList::reprobados() {
+    Node* p = first;
+    int Nopasaron = 0;
+    while (p) {
+        if (p->data < 51) {
+            Nopasaron++;
+        }
+        p = p->next;
+    }
+    return Nopasaron;
+}
+
+int main() {
+    int A[] = { 90,40,80,30 };
+    string estudiantes[] = { "Ana","Luis","Maria","Pedro" };
+    int n = sizeof(A) / sizeof(A[0]);
+    LinkedList lista(estudiantes, A, n);
+    lista.display();
+    //cout << "El tamanio de la lista es: " << lista.length() << endl;
+    
+    cout << "Cantidad de estudiantes aprobados: " << lista.aprobados() << endl;
+    cout << "Cantidad de estudiantes reprobados: " << lista.reprobados() << endl;
+    lista.mayor();
+    lista.menor();
+
+
+    return 0;
+}
