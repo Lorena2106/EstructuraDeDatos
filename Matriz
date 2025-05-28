@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+
+    cout << "Ingrese el tamaño de la matriz cuadrada (n x n): ";
+    cin >> n;
+
+    int matriz[100][100]; // Puedes ajustar el tamaño si lo necesitas
+    int suma = 0;
+    int sumaDiagonal = 0;
+
+    // Llenar la matriz
+    cout << "Ingrese los elementos de la matriz:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << "Elemento [" << i << "][" << j << "]: ";
+            cin >> matriz[i][j];
+            suma += matriz[i][j];
+
+            // Sumar la diagonal principal
+            if (i == j) {
+                sumaDiagonal += matriz[i][j];
+            }
+        }
+    }
+
+    // Mostrar la matriz
+    cout << "\nMatriz ingresada:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cout << matriz[i][j] << "\t";
+        }
+        cout << endl;
+    }
+
+    // Mostrar resultados
+    cout << "\nSuma total de los elementos: " << suma << endl;
+    cout << "Suma de la diagonal principal: " << sumaDiagonal << endl;
+
+    return 0;
+}
