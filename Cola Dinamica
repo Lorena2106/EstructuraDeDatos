@@ -1,0 +1,98 @@
+#include <iostream>
+using namespace std;
+
+// Clase Dato para representar un pedido de aceite
+class Dato {
+private:
+    int id;
+    string nombreCliente;
+    float cantidadDeAceite;
+
+public:
+    // Constructor
+    Dato(int i = 0, string nombre = "", float cantidad = 0) {
+        id = i;
+        nombreCliente = nombre;
+        cantidadDeAceite = cantidad;
+    }
+
+    // Métodos get
+    int getId() { return id; }
+    string getNombreCliente() { return nombreCliente; }
+    float getCantidadDeAceite() { return cantidadDeAceite; }
+
+    // Mostrar
+    void mostrar() {
+        cout << "ID: " << id
+             << ", Cliente: " << nombreCliente
+             << ", Cantidad de Aceite: " << cantidadDeAceite << " litros" << endl;
+    }
+};
+
+// Nodo para la cola
+struct Nodo {
+    Dato dato;
+    Nodo* siguiente;
+
+    Nodo(Dato d) {
+        dato = d;
+        siguiente = nullptr;
+    }
+};
+
+// Clase Cola dinámica
+class Cola {
+private:
+    Nodo* frente;
+    Nodo* fin;
+
+public:
+    Cola() {
+        frente = fin = nullptr;
+    }
+
+    // Encolar (agregar)
+    void encolar(Dato d) {
+        Nodo* nuevo = new Nodo(d);
+        if (fin == nullptr) {
+            frente = fin = nuevo;
+        } else {
+            fin->siguiente = nuevo;
+            fin = nuevo;
+        }
+    }
+
+    // Desencolar (quitar)
+    void desencolar() {
+        if (frente == nullptr) {
+            cout << "Cola vacía, no se puede eliminar.\n";
+            return;
+        }
+        Nodo* temp = frente;
+        frente = frente->siguiente;
+        delete temp;
+
+        if (frente == nullptr)
+            fin = nullptr;
+    }
+
+    // Mostrar todos los pedidos
+    void mostrarCola() {
+        Nodo* actual = frente;
+        if (!actual) {
+            cout << "La cola está vacía.\n";
+            return;
+        }
+        while (actual != nullptr) {
+            actual->dato.mostrar();
+            actual = actual->siguiente;
+        }
+    }
+
+    ~Cola() {
+        while (frente != nullptr) {
+            desencolar();
+        }
+    }
+};
+
