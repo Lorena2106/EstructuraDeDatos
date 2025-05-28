@@ -1,0 +1,98 @@
+#include <iostream>
+using namespace std;
+
+const int MAX = 5; // Tamaño de la cola
+
+class ColaCircular {
+private:
+    int frente;
+    int fin;
+    int elementos[MAX];
+
+public:
+    ColaCircular() {
+        frente = -1;
+        fin = -1;
+    }
+
+    // Verifica si la cola está llena
+    bool estaLlena() {
+        return (frente == (fin + 1) % MAX);
+    }
+
+    // Verifica si la cola está vacía
+    bool estaVacia() {
+        return (frente == -1);
+    }
+
+    // Encolar (agregar elemento)
+    void encolar(int dato) {
+        if (estaLlena()) {
+            cout << "Cola circular llena.\n";
+            return;
+        }
+        if (estaVacia()) {
+            frente = fin = 0;
+        } else {
+            fin = (fin + 1) % MAX;
+        }
+        elementos[fin] = dato;
+        cout << "Elemento " << dato << " encolado.\n";
+    }
+
+    // Desencolar (quitar elemento)
+    void desencolar() {
+        if (estaVacia()) {
+            cout << "Cola circular vacía.\n";
+            return;
+        }
+        cout << "Elemento " << elementos[frente] << " desencolado.\n";
+        if (frente == fin) {
+            frente = fin = -1; // La cola queda vacía
+        } else {
+            frente = (frente + 1) % MAX;
+        }
+    }
+
+    // Mostrar los elementos de la cola
+    void mostrarCola() {
+        if (estaVacia()) {
+            cout << "Cola vacía.\n";
+            return;
+        }
+        cout << "Elementos en la cola: ";
+        int i = frente;
+        while (true) {
+            cout << elementos[i] << " ";
+            if (i == fin)
+                break;
+            i = (i + 1) % MAX;
+        }
+        cout << endl;
+    }
+};
+
+// Programa principal para probar
+int main() {
+    ColaCircular cola;
+
+    cola.encolar(10);
+    cola.encolar(20);
+    cola.encolar(30);
+    cola.encolar(40);
+    cola.encolar(50); // Llenará la cola
+
+    cola.mostrarCola();
+
+    cola.desencolar();
+    cola.desencolar();
+
+    cola.mostrarCola();
+
+    cola.encolar(60);
+    cola.encolar(70); // Reutiliza espacios vacíos gracias a la circularidad
+
+    cola.mostrarCola();
+
+    return 0;
+}
