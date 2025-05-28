@@ -1,0 +1,90 @@
+#include <iostream>
+using namespace std;
+
+class Node{
+    public: 
+        int data;
+        Node *next;
+};
+
+class LinkedList {
+    private: 
+        Node *first;
+    public:
+        LinkedList(){
+            first=nullptr;
+        }
+        LinkedList(int A[], int n);
+        void display();
+        void insert(int A[], int n);
+        //void remove (int A[], int n);
+        //void search (int A[], int n);
+        int length ();
+        int mayor();
+        int menor();
+    
+};
+
+    LinkedList::LinkedList(int A[], int n){
+    Node *t, *last;
+    first=new Node();
+    first->data=A[0];
+    first->next=nullptr;
+    last=first;
+    for(int i=1;i<n;i++){
+        t=new Node();
+        t->data=A[i];
+        last->next=t;
+        last=t;
+    }
+}
+void LinkedList ::display() {
+    Node *p=first;
+    while(p){
+        cout<<p->data<<endl;
+        p=p->next;
+    }
+}
+
+int LinkedList::length(){
+    Node *p=first;
+    int contador=0;
+    while(p){
+        contador=contador+1;
+        p=p->next;
+    }
+    return contador;
+}
+
+int LinkedList::mayor(){
+    Node *p=first;
+    int maximo=0;
+    while(p){
+        if (p->data>maximo)
+            maximo=p->data;
+        p=p->next;
+    }
+    return maximo;
+}
+int LinkedList::menor(){
+    Node *p=first;
+    int minimo=first->data;
+    while(p){
+        if (p->data<minimo)
+            minimo=p->data;
+        p=p->next;
+    }
+    return minimo;
+}
+
+int main(){
+    int A[]={1,2,3,4,5,6,7,8,9,10};
+    int n = sizeof (A)/sizeof(A[0]);
+    LinkedList lista (A,n);
+    lista.display();
+    cout<<"El tamaño de la lista es: "<<lista.length()<<endl;
+    cout<<"El valor maximo de la lista es: "<<lista.mayor()<<endl;
+    cout<<"El valor minimo de la lista es: "<<lista.menor()<<endl;
+    //lista.insert(A,n);
+    return 0;
+}
