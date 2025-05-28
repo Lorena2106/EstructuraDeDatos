@@ -1,0 +1,29 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int contarVocales(string frase);
+
+int main(){
+    string frase = "Bolivianos, el hado propicio, corono nuestros votos y anhelo; es ya libre ya libre este suelo, ya ceso su servil condicion";
+    int cantidad = 0;
+    
+    cantidad = contarVocales(frase);
+    cout << "Numero de vocales a : " << cantidad << endl;
+    
+    
+    return 0;
+}
+
+int contarVocales(string frase){
+    int vocales = 0;
+    int pos;
+    pos = frase.find('a');
+    
+     while (pos != -1){
+        vocales++;
+        pos = frase.find('a', pos+1);
+    }
+    return vocales;
+}
