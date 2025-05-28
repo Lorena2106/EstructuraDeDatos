@@ -1,0 +1,64 @@
+class Cola:
+    def _init_(self):
+        self.items = []
+
+    def esta_vacia(self):
+        return len(self.items) == 0
+
+    def encolar(self, item):
+        self.items.append(item)
+
+    def desencolar(self):
+        if not self.esta_vacia():
+            return self.items.pop(0)
+        else:
+            return "Cola vacía"
+
+    def ver_frente(self):
+        if not self.esta_vacia():
+            return self.items[0]
+        else:
+            return "Cola vacía"
+
+    def tamaño(self):
+        return len(self.items)
+
+
+def mostrar_menu():
+    print("\n--- MENÚ DE COLA ---")
+    print("1. Encolar elemento")
+    print("2. Desencolar elemento")
+    print("3. Ver frente de la cola")
+    print("4. Ver si la cola está vacía")
+    print("5. Ver tamaño de la cola")
+    print("6. Salir")
+
+
+# Programa principal
+mi_cola = Cola()
+
+while True:
+    mostrar_menu()
+    opcion = input("Selecciona una opción: ")
+
+    if opcion == "1":
+        elemento = input("Ingresa el elemento a encolar: ")
+        mi_cola.encolar(elemento)
+        print(f"'{elemento}' fue agregado a la cola.")
+    elif opcion == "2":
+        resultado = mi_cola.desencolar()
+        print(f"Elemento desencolado: {resultado}")
+    elif opcion == "3":
+        print(f"Frente de la cola: {mi_cola.ver_frente()}")
+    elif opcion == "4":
+        if mi_cola.esta_vacia():
+            print("La cola está vacía.")
+        else:
+            print("La cola NO está vacía.")
+    elif opcion == "5":
+        print(f"Tamaño de la cola: {mi_cola.tamaño()}")
+    elif opcion == "6":
+        print("Saliendo del programa.")
+        break
+    else:
+        print("Opción no válida. Intenta de nuevo.")
